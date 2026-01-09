@@ -11,7 +11,7 @@ import { kv } from "./kv.ts";
 import { BotContext } from "./context.ts";
 import { setePalmosCommand } from "./commands/setepalmos.ts";
 
-const bot = new Bot<BotContext>(Deno.env.get("BOT_TOKEN")!);
+export const bot = new Bot<BotContext>(Deno.env.get("BOT_TOKEN")!);
 
 bot.use(conversations({
   storage: new DenoKVAdapter(kv),
@@ -32,9 +32,3 @@ commands.add(setePalmosCommand);
 bot.use(commands);
 
 await commands.setCommands(bot);
-
-bot.start({
-  onStart: ({ username }) => {
-    console.log(`Bot started as @${username}`);
-  },
-});
