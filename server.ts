@@ -1,17 +1,11 @@
 import { Application } from "oak";
 import { webhookCallback } from "grammy";
 import { bot } from "./bot.ts";
+import { config } from "./config.ts";
 
-const app = new Application(); // or whatever you're using
+const app = new Application();
 
-export const webhookSecret = Deno.env.get("BOT_TOKEN")?.replace(/[^a-zA-Z0-9]/g, "");
-
-if (!webhookSecret) {
-  throw new Error("BOT_TOKEN is not set");
-}
-
-// Make sure to specify the framework you use.
-app.use(webhookCallback(bot, "oak", { secretToken: webhookSecret }));
+app.use(webhookCallback(bot, "oak", { secretToken: config.webhookSecret }));
 
 const port = Number(Deno.env.get("PORT") ?? '3000');
 

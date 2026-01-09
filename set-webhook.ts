@@ -1,5 +1,5 @@
 import { bot } from "./bot.ts";
-import { webhookSecret } from "./server.ts";
+import { config } from "./config.ts";
 
 const webhookUrl = Deno.args[0]
 
@@ -11,4 +11,4 @@ if (!webhookUrl) {
 new URL(webhookUrl);
 
 console.log(`Setting webhook to ${webhookUrl}`);
-await bot.api.setWebhook(webhookUrl, { secret_token: webhookSecret });
+await bot.api.setWebhook(webhookUrl, { secret_token: config.webhookSecret });
