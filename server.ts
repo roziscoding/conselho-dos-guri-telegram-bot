@@ -13,5 +13,7 @@ if (!webhookSecret) {
 // Make sure to specify the framework you use.
 app.use(webhookCallback(bot, "oak", { secretToken: webhookSecret }));
 
-app.listen({ port: 3000 });
-console.log("Server is running on http://localhost:3000");
+const port = Number(Deno.env.get("PORT") ?? '3000');
+
+app.listen({ port });
+console.log(`Server is running on http://localhost:${port}`);
