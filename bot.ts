@@ -1,15 +1,13 @@
 import { CommandGroup } from "@grammyjs/commands";
-import {
-  conversations,
-  createConversation,
-} from "@grammyjs/conversations";
+import { conversations, createConversation } from "@grammyjs/conversations";
 import { DenoKVAdapter } from "denokv";
 import { Bot } from "grammy";
-import { setSetePalmos } from "./conversations/setepalmos/set.ts";
-import { changeSetePalmos } from "./conversations/setepalmos/change.ts";
-import { kv } from "./kv.ts";
-import { BotContext } from "./context.ts";
 import { setePalmosCommand } from "./commands/setepalmos.ts";
+import { BotContext } from "./context.ts";
+import { changeSetePalmos } from "./conversations/setepalmos/change.ts";
+import { getSetePalmos } from "./conversations/setepalmos/get.ts";
+import { setSetePalmos } from "./conversations/setepalmos/set.ts";
+import { kv } from "./kv.ts";
 
 export const bot = new Bot<BotContext>(Deno.env.get("BOT_TOKEN")!);
 
@@ -19,6 +17,7 @@ bot.use(conversations({
 
 bot.use(createConversation(setSetePalmos));
 bot.use(createConversation(changeSetePalmos));
+bot.use(createConversation(getSetePalmos));
 
 const commands = new CommandGroup<BotContext>();
 

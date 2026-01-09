@@ -1,6 +1,7 @@
 {
   "tasks": {
-    "dev": "deno run --env-file=.env -A --unstable-kv --watch polling.ts"
+    "dev": "deno run --env-file=.env -A --unstable-kv --watch polling.ts",
+    "set-webhook": "deno run --env-file=.env -A --unstable-kv set-webhook.ts"
   },
   "imports": {
     "@grammyjs/commands": "npm:@grammyjs/commands@^1.2.0",
